@@ -1,33 +1,37 @@
-const  mongoose = require("mongoose");
+const mongoose = require("mongoose");
 const constants = require('../utils/constants')
 
 const theatreSchema = new mongoose.Schema({
 
-    name : {
-        type : String,
-        required : true
+    name: {
+        type: String,
+        required: true
     },
-    description : {
-        type : String,
-        required : true
+    description: {
+        type: String,
+        required: true
     },
-    city : {
-        type : String,
-        required : true
+    city: {
+        type: String,
+        required: true
     },
-    pinCode : {
-        type : Number,
-        required : true
+    pinCode: {
+        type: Number,
+        required: true
     },
-    showTypes : {
-        type : [String],
-        required : true,
-        enum : [constants.theatreShows.morning, constants.theatreShows.noon, constants.theatreShows.evening, constants.theatreShows.night]
+    movies: {
+        type: [mongoose.SchemaTypes.ObjectId],
+        ref: "Movie"
     },
-    numberOfSeats : {
-        type : Number,
-        required : true
+    showTypes: {
+        type: [String],
+        required: true,
+        enum: [constants.theatreShows.morning, constants.theatreShows.noon, constants.theatreShows.evening, constants.theatreShows.night]
+    },
+    numberOfSeats: {
+        type: Number,
+        required: true
     }
-},{ timestamps : true , versionKey : false});
+}, { timestamps: true, versionKey: false });
 
-module.exports = mongoose.model("Theatre" , theatreSchema);
+module.exports = mongoose.model("Theatre", theatreSchema);
